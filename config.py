@@ -49,7 +49,7 @@ WELCOME_MESSAGE = (
     "👋 Welcome to the WhatsApp Status View Increaser Bot!\n\n"
     "📲 Join one of our VCF groups below to share your number and increase your WhatsApp Status views!"
 )
-WELCOME_IMAGE = getenv("WELCOME_IMAGE", "https://i.ibb.co/tpqjvwDV/promobanner2.jpg")  # Optional: Add URL to welcome image if desired
+WELCOME_IMAGE = getenv("WELCOME_IMAGE", "https://i.ibb.co/xtDy5vw9/whatsappviews.jpg")  # Optional: Add URL to welcome image if desired
 DEFAULT_WATERMARK = getenv("DEFAULT_WATERMARK", "🔥")  # Watermark for VCF names
 DELETE_DELAY_HOURS = int(getenv("DELETE_DELAY_HOURS", "24"))  # Delay before deleting group data
 VCF_FILE_NAME_PATTERN = getenv("VCF_FILE_NAME_PATTERN", "VCF_{limit}_{date}.vcf")
@@ -60,3 +60,4 @@ TEMP_VCF_PATH = os.path.join(os.path.dirname(__file__), "data", "temp_vcf")
 os.makedirs(TEMP_VCF_PATH, exist_ok=True)
 
 os.makedirs(os.path.dirname(LOG_FILE), exist_ok=True)
+
