@@ -6,11 +6,11 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # ───── Basic Bot Configuration ───── #
-API_ID = int(getenv("API_ID", "25753873"))  # Get from https://my.telegram.org
-API_HASH = getenv("API_HASH", "3a5cdc2079cd76af80586102bd9761e2")  # Get from https://my.telegram.org
-BOT_TOKEN = getenv("BOT_TOKEN", "8286338558:AAFthW_lKzhFysvZ8xBEyjPD94Nymuh6iv0")  # Get from @BotFather
+API_ID = int(getenv("API_ID", ""))  # Get from https://my.telegram.org
+API_HASH = getenv("API_HASH", "")  # Get from https://my.telegram.org
+BOT_TOKEN = getenv("BOT_TOKEN", "")  # Get from @BotFather
 BOT_NAME = getenv("BOT_NAME", "WaStatusBot")
-BOT_USERNAME = getenv("BOT_USERNAME", "@ModstoreBot")
+BOT_USERNAME = getenv("BOT_USERNAME", "@WaStatusViewBot")
 OWNER_ID = int(getenv("OWNER_ID", "5962658076"))  # Your Telegram user ID
 ADMINS = [int(admin_id) for admin_id in getenv("ADMINS", str(OWNER_ID)).split(",")]
 # Example additional admin IDs; allow override via ADMIN_IDS env var (comma-separated)
@@ -20,7 +20,7 @@ RENDER_PORT = int(getenv("RENDER_PORT", "10000"))  # Port for health check serve
 
 # ───── Mongo & Logging ───── #
 MONGO_DB_URI = getenv("MONGO_DB_URI", "mongodb+srv://anonymousguywas:12345Trials@cluster0.t4nmrtp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
-MONGO_DB_NAME = getenv("MONGO_DB_NAME", "WaStatusBot")
+MONGO_DB_NAME = getenv("MONGO_DB_NAME", "WaStatusViewsBot")
 LOG_FILE = os.path.join(os.path.dirname(__file__), "logs", "bot.log")
 
 # ───── Channel Configurations ───── #
@@ -58,4 +58,5 @@ TEMP_VCF_PATH = os.path.join(os.path.dirname(__file__), "data", "temp_vcf")
 # ───── File System Setup ───── #
 # Ensure directories exist
 os.makedirs(TEMP_VCF_PATH, exist_ok=True)
+
 os.makedirs(os.path.dirname(LOG_FILE), exist_ok=True)
