@@ -96,8 +96,10 @@ async def handle_approve(client: Client, message):
         caption = (
             f"📁 Group: {group_id} VCF\n"
             f"👥 Total Contacts: {total_contacts}\n"
-            f"📅 Generated on: {current_date}\n"
+            f"📅 Generated on: {current_date}\n\n"
             f"⚠️ Warning: Do NOT download this file if you didn't submit to this group."
+            f" ▬▬▬▬「 ᴩᴏᴡᴇʀᴇᴅ ʙy 」▬▬▬▬\n"
+            f"              •@Wastatusviewsbot•"
         )
 
         try:
@@ -196,4 +198,5 @@ async def handle_approve(client: Client, message):
                 [InlineKeyboardButton("🏠 Back to Home", callback_data="back_to_home")]
             ])
         )
+
         logger.error(f"Error approving group {group_id} for user {user_id}: {e}", exc_info=True)
