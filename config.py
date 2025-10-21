@@ -10,7 +10,7 @@ API_ID = int(getenv("API_ID", ""))  # Get from https://my.telegram.org
 API_HASH = getenv("API_HASH", "")  # Get from https://my.telegram.org
 BOT_TOKEN = getenv("BOT_TOKEN", "")  # Get from @BotFather
 BOT_NAME = getenv("BOT_NAME", "WaStatusBot")
-BOT_USERNAME = getenv("BOT_USERNAME", "@WaStatusViewBot")
+BOT_USERNAME = getenv("BOT_USERNAME", "@WaStatusViewsBot")
 OWNER_ID = int(getenv("OWNER_ID", "5962658076"))  # Your Telegram user ID
 ADMINS = [int(admin_id) for admin_id in getenv("ADMINS", str(OWNER_ID)).split(",")]
 # Example additional admin IDs; allow override via ADMIN_IDS env var (comma-separated)
@@ -24,6 +24,10 @@ MONGO_DB_NAME = getenv("MONGO_DB_NAME", "WaStatusViewsBot")
 LOG_FILE = os.path.join(os.path.dirname(__file__), "logs", "bot.log")
 
 # ───── Channel Configurations ───── #
+SUPPORT_GROUP_URL = getenv("SUPPORT_GROUP_URL", "https://t.me/nextgenroom")
+SOURCE_CODE_URL = getenv("SOURCE_CODE_URL", "https://t.me/Am_Itachiuchiha")
+TUTORIAL_VIDEO_URL = getenv("TUTORIAL_VIDEO_URL", "https://youtube.com/@freenethubtech?si=PJHbpcYOxBdWES0S")
+
 DOWNLOAD_CHANNEL = {
     "name": "VCF Downloads",
     "url": getenv("DOWNLOAD_CHANNEL_URL", "https://t.me/vcfdownload"),
@@ -60,4 +64,5 @@ TEMP_VCF_PATH = os.path.join(os.path.dirname(__file__), "data", "temp_vcf")
 os.makedirs(TEMP_VCF_PATH, exist_ok=True)
 
 os.makedirs(os.path.dirname(LOG_FILE), exist_ok=True)
+
 
