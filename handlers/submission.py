@@ -315,7 +315,7 @@ async def handle_back_to_home(client: Client, callback_query):
             ],
             # Second row: two buttons side by side  
             [
-                InlineKeyboardButton("📊 Group Stats", callback_data="group_stats"),
+                InlineKeyboardButton("💡 Tutorial", callback_data="tutorial"),
                 InlineKeyboardButton("ℹ️ About Bot", callback_data="about_bot")
             ]
         ])
