@@ -9,6 +9,9 @@ from database.users import get_all_users, total_users_count
 # Setup logging
 logger = logging.getLogger(__name__)
 
+# Temporary storage for broadcast state
+broadcast_state = {}
+
 async def broadcast_messages(client: Client, user_id: int, message) -> tuple[bool, str]:
     """Send a broadcast message to a user and return status."""
     try:
@@ -30,12 +33,31 @@ async def pm_broadcast(client: Client, message):
     """Handle the /broadcast command to send messages to all users."""
     logger.debug(f"Handling /broadcast for admin {message.from_user.id}")
     try:
+        admin_id = message.from_user.id
+        # Store the admin's state to expect a broadcast message
+        broadcast_state[admin_id] = {"awaiting_message": True}
+
         # Prompt admin for the broadcast message
-        b_msg = await client.ask(
-            chat_id=message.from_user.id,
-            text="📢 Now send me your broadcast message (text, photo, etc.)."
+        await message.reply_text(
+            "📢 Please send the broadcast message (text, photo, etc.).",
+            quote=True
         )
-        logger.info(f"Received broadcast message from admin {message.from_user.id}")
+        logger.info(f"Prompted admin {admin_id} for broadcast message")
+    except Exception as e:
+        await message.reply_text("❌ Error initiating broadcast. Please try again.")
+        logger.error(f"Error initiating broadcast for admin {admin_id}: {e}", exc_info=True)
+
+@Client.on_message(filters.user(ADMIN_IDS) & filters.private)
+async def handle_broadcast_message(client: Client, message):
+    """Handle the broadcast message sent by the admin."""
+    admin_id = message.from_user.id
+    if admin_id not in broadcast_state or not broadcast_state[admin_id].get("awaiting_message"):
+        return  # Ignore if not expecting a broadcast message
+
+    try:
+        # Clear the broadcast state for this admin
+        del broadcast_state[admin_id]
+        logger.info(f"Received broadcast message from admin {admin_id}")
 
         # Get all users from database
         users = get_all_users()
@@ -57,7 +79,7 @@ async def pm_broadcast(client: Client, message):
 
         for user in users:
             if 'user_id' in user:
-                pti, sh = await broadcast_messages(client, int(user['user_id']), b_msg)
+                pti, sh = await broadcast_messages(client, int(user['user_id']), message)
                 if pti:
                     success += 1
                 elif sh == "Blocked":
@@ -67,7 +89,7 @@ async def pm_broadcast(client: Client, message):
                 elif sh == "Error":
                     failed += 1
                 done += 1
-                if done % 20 == 0:
+                if done % 20==-0:
                     await sts.edit_text(
                         f"Broadcast in progress:\n\n"
                         f"Total Users: {total_users}\n"
@@ -102,7 +124,10 @@ async def pm_broadcast(client: Client, message):
             f"Blocked: {blocked}\n"
             f"Deleted: {deleted}"
         )
-        logger.info(f"Broadcast completed for admin {message.from_user.id}: Success={success}, Blocked={blocked}, Deleted={deleted}, Failed={failed}")
+        logger.info(f"Broadcast completed for admin {admin_id}: Success={success}, Blocked={blocked}, Deleted={deleted}, Failed={failed}")
     except Exception as e:
+        # Clear the broadcast state in case of error
+        if admin_id in broadcast_state:
+            del broadcast_state[admin_id]
         await message.reply_text("❌ Error during broadcast. Please try again.")
-        logger.error(f"Broadcast error for admin {message.from_user.id}: {e}", exc_info=True)
+        logger.error(f"Broadcast error for admin {admin_id}: {e}", exc_info=True)
