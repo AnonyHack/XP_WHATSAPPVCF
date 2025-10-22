@@ -42,7 +42,7 @@ async def handle_start(client: Client, message):
             ],
             # Second row: two buttons side by side  
             [
-                InlineKeyboardButton("📊 Group Stats", callback_data="group_stats"),
+                InlineKeyboardButton("💡 Tutorial", callback_data="tutorial"),
                 InlineKeyboardButton("ℹ️ About Bot", callback_data="about_bot")
             ]
         ])
