@@ -38,7 +38,7 @@ REQUIRED_CHANNELS = [
     {
         "name": "Main Channel",
         "url": getenv("MAIN_CHANNEL_URL", "https://t.me/XPTOOLSTEAM"),
-        "chat_id": getenv("MAIN_CHANNEL_ID", "-1003176850794")
+        "chat_id": getenv("MAIN_CHANNEL_ID", "@XPTOOLSTEAM")
     },
     # Add more channels if needed, e.g.:
     # {
@@ -64,5 +64,6 @@ TEMP_VCF_PATH = os.path.join(os.path.dirname(__file__), "data", "temp_vcf")
 os.makedirs(TEMP_VCF_PATH, exist_ok=True)
 
 os.makedirs(os.path.dirname(LOG_FILE), exist_ok=True)
+
 
 
