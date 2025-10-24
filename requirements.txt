@@ -1,4 +1,5 @@
-Pyrogram  # For Telegram Bot API using Pyrogram
+Pyrogram>=2.0.0  # For Telegram Bot API using Pyrogram
 pymongo     # For MongoDB interaction
 python-dotenv  # For loading environment variables from .env file
 tgcrypto  # For optimized cryptographic operations in Pyrogram
+
