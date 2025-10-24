@@ -11,10 +11,10 @@ API_HASH = getenv("API_HASH", "")  # Get from https://my.telegram.org
 BOT_TOKEN = getenv("BOT_TOKEN", "")  # Get from @BotFather
 BOT_NAME = getenv("BOT_NAME", "WaStatusBot")
 BOT_USERNAME = getenv("BOT_USERNAME", "@WaStatusViewsBot")
-OWNER_ID = int(getenv("OWNER_ID", "5962658076"))  # Your Telegram user ID
+OWNER_ID = int(getenv("OWNER_ID", "5962658076, 5723483216"))  # Your Telegram user ID
 ADMINS = [int(admin_id) for admin_id in getenv("ADMINS", str(OWNER_ID)).split(",")]
 # Example additional admin IDs; allow override via ADMIN_IDS env var (comma-separated)
-ADMIN_IDS = [int(x) for x in getenv("ADMIN_IDS", "5962658076").split(",")]
+ADMIN_IDS = [int(x) for x in getenv("ADMIN_IDS", "5962658076, 5723483216").split(",")]
 OWNER_USERNAME = getenv("OWNER_USERNAME", "@Am_Itachiuchiha")
 RENDER_PORT = int(getenv("RENDER_PORT", "10000"))  # Port for health check server
 
@@ -64,6 +64,7 @@ TEMP_VCF_PATH = os.path.join(os.path.dirname(__file__), "data", "temp_vcf")
 os.makedirs(TEMP_VCF_PATH, exist_ok=True)
 
 os.makedirs(os.path.dirname(LOG_FILE), exist_ok=True)
+
 
 
 
